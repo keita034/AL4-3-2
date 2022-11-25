@@ -97,7 +97,6 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 		hitflag = CheckLine2Circle(lineStart, lineEnd, circle, circleR);
 
-
 		// •`‰æˆ—
 		DrawLine(lineStart.x, lineStart.y, lineEnd.x, lineEnd.y, GetColor(255, 255, 255));
 		
@@ -140,11 +139,11 @@ bool CheckLine2Circle(Vector2& lineStart, Vector2& lineEnd, Vector2& circle, int
 
 	if (fabsf(distance)< circleR)
 	{
-		float circlVecLineStartVecDot = lineStartCirclVec.dot(lineVec);
+		float circleStartDot = lineStartCirclVec.dot(lineVec);
 
-		float circlVecLineEndVecDot = lineEndCirclVec.dot(lineVec);
+		float circlEndDot = lineEndCirclVec.dot(lineVec);
 
-		if (circlVecLineStartVecDot* circlVecLineEndVecDot<= 0)
+		if (circleStartDot * circlEndDot <= 0)
 		{
 			return true;
 		}
