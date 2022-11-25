@@ -46,7 +46,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 
 	// ゲームループで使う変数の宣言
-	bool hitFulg = false;
+	bool hitflag = false;
 	Vector2 lineStart = { 20 ,20 }, lineEnd = { 120, 20 };
 
 	int circleR = 40;
@@ -95,20 +95,13 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 			lineEnd.x += 10;
 		}
 
-		hitFulg = CheckLine2Circle(lineStart, lineEnd, circle, circleR);
+		hitflag = CheckLine2Circle(lineStart, lineEnd, circle, circleR);
 
 
 		// 描画処理
 		DrawLine(lineStart.x, lineStart.y, lineEnd.x, lineEnd.y, GetColor(255, 255, 255));
 		
-		if (hitFulg)
-		{
-			DrawCircle(circle.x, circle.y, circleR, GetColor(255, 0, 0));
-		}
-		else
-		{
-			DrawCircle(circle.x, circle.y, circleR, GetColor(255, 255, 255));
-		}
+		hitflag ? DrawCircle(circle.x, circle.y, circleR, GetColor(255, 0, 0)) : DrawCircle(circle.x, circle.y, circleR, GetColor(255, 255, 255));
 		
 		//---------  ここまでにプログラムを記述  ---------//
 		// (ダブルバッファ)裏面
@@ -145,7 +138,7 @@ bool CheckLine2Circle(Vector2& lineStart, Vector2& lineEnd, Vector2& circle, int
 
 	float distance = lineStartCirclVec.cross(normLineVec);
 
-	if (fabs(distance)< circleR)
+	if (fabsf(distance)< circleR)
 	{
 		float circlVecLineStartVecDot = lineStartCirclVec.dot(lineVec);
 
